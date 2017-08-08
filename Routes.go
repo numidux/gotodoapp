@@ -2,14 +2,15 @@ package main
 
 import (
 	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
 type Route struct {
-	Name		string
-	Method		string
-	Pattern		string
-	HandlerFunc	http.HandlerFunc
+	Name        string
+	Method      string
+	Pattern     string
+	HandlerFunc http.HandlerFunc
 }
 
 type Routes []Route
@@ -17,7 +18,7 @@ type Routes []Route
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
-	for _, route:= range routes {
+	for _, route := range routes {
 		router.
 			Methods(route.Method).
 			Path(route.Pattern).
@@ -35,17 +36,22 @@ var routes = Routes{
 		"/",
 		Index,
 	},
-	 Route{
-        "TodoIndex",
-        "GET",
-        "/todos",
-        TodoIndex,
-    },
-    Route{
-        "TodoShow",
-        "GET",
-        "/todos/{todoId}",
-        TodoShow,
-    },
-
+	Route{
+		"TodoIndex",
+		"GET",
+		"/todos",
+		TodoIndex,
+	},
+	Route{
+		"TodoShow",
+		"GET",
+		"/todos/{todoId}",
+		TodoShow,
+	},
+	Route{
+		"TodoCreate",
+		"POST",
+		"/todos",
+		TodoCreate,
+	},
 }
